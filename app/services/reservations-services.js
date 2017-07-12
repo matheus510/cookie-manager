@@ -1,10 +1,14 @@
-let connection = require('.app/db-services/connection.js')
+let getConnection = require('../db-services/connection.js')
 
-function getReservationsList(){
+function getList(){
 
     return new Promise( (resolve, reject) => {
 
+	    let connection = getConnection();
+
 	    connection.query('select * from reservation', function(err, res){
+	       	connection.end();
+
 	        if(err)
 	        	return reject(err);
 
@@ -13,22 +17,29 @@ function getReservationsList(){
 
     })
     
-    connection.end();
+    
 }
 
 function addReservation(newReservation){
 
     return new Promise( (resolve, reject) => {
-    	const {id, date, startHour, endHour, requesterName, requesterId, roomId} = newReservation; 
+    	const {date, start, end, nameReq, room} = newReservation; 
 
+    	let connection = getConnection();
 
-	    connection.query(`INSERT INTO reservation (Date, In, Out, RequesterName, RequesterId, RoomId)
-	    				 VALUES (${date},
-	    				 		 ${startHour},
-	    				 		 ${endHour},
-	    				 		 ${requesterName},
-	    				 		 ${requesterId},
-	    				 		 ${roomId})`, function(err, res){
+    	let queryTemp = `INSERT INTO reservation (DateReserve, StartHour, EndHour, Name, RoomId)
+	    				 VALUES (STR_TO_DATE("${date}",'%d-%m-%Y'),
+	    				 		 STR_TO_DATE("${start}",'%H:%i:%s'),
+	    				 		 STR_TO_DATE("${end}",'%H:%i:%s'),
+	    				 		 "${nameReq}",
+	    				 		 "${room}")`;
+
+	    console.log(queryTemp);
+	    connection.query(queryTemp, function(err, res){
+
+			connection.end();	
+
+			//console.log(res);    				 		 	
 	        if(err)
 	        	return reject(err);
 
@@ -37,16 +48,22 @@ function addReservation(newReservation){
 
     })
     
-    connection.end();
+    
 }
 
-function editReservation(newReservation){
+function editReservation(editedReservation){
 
     return new Promise( (resolve, reject) => {
-    	const {id, date, startHour, endHour, requesterName, requesterId, roomId} = newReservation; 
+    	const {id, date, start, end, nameReq, room} = editedReservation; 
 
+    	let connection = getConnection();
 
-	    connection.query(`UPDATE reservation SET 'Date'=?, 'In'=?, 'Out'=?, 'RequesterName'=?, 'RequesterId'=?, 'RoomId'=?, WHERE Id=?` [date, startHour, endHour, requesterName, requesterId, roomId, id], function(err, res){
+    	let queryTemp = `UPDATE reservation SET DateReserve=DATE(STR_TO_DATE("${date}",'%d-%m-%Y')), StartHour=DATE(STR_TO_DATE("${start}",'%H:%i:%s')), EndHour=DATE(STR_TO_DATE("${end}",'%H:%i:%s')), Name="${nameReq}", RoomId="${room}" WHERE Id=${id}`;
+
+    	console.log(queryTemp);
+	    connection.query(queryTemp, function(err, res){
+	        connection.end();
+
 	        if(err)
 	        	return reject(err);
 
@@ -55,14 +72,18 @@ function editReservation(newReservation){
 
     })
  
-    connection.end();
+    
 }
 
 function deleteReservation(reservationId){
 
     return new Promise( (resolve, reject) => {
 
+    	let connection = getConnection();
+
 	    connection.query('DELETE FROM `reservation` WHERE `id`=?' [reservationid], function(err, res){
+	        connection.end();
+
 	        if(err)
 	        	return reject(err);
 
@@ -71,14 +92,17 @@ function deleteReservation(reservationId){
 
     })
  
-    connection.end();
+    
 }
 
 function getReservation(reservationId) {
 
     return new Promise( (resolve, reject) => {
 
+    	let connection = getConnection();
+
 	    connection.query('select * from reservation WHERE `id`=?' [reservationid], function(err, res){
+	    	connection.end();
 	        if(err)
 	        	return reject(err);
 
@@ -87,7 +111,7 @@ function getReservation(reservationId) {
 
     })
  
-    connection.end();
+    
 }
 
 module.exports = {

@@ -1,5 +1,4 @@
 let app = require('./config/express.js')();
-let rotaReservations = require('./app/routes/reservations');
 let reservationServices = require('./app/services/reservations-services.js');
 let bodyParser = require('body-parser');
 
@@ -30,34 +29,37 @@ app.get('/reservations/:id', function(req, res) {
 
 
 app.post('/reservations', function(req, res) {
-	reservationServices.addReservation().then( results => {
-		res.send(results);
+	console.log(req.body);
+
+	reservationServices.addReservation(req.body).then( results => {
+		console.log(2);
+		res.send(null)
 	}, error => {
-		console.log(results)
+		console.log(error)
 		res.status(400).send();
 	})
 });
 
 app.put('/reservations', function(req, res) {
-	reservationsServices.editReservation(/* Reserva */).then( results => {
-		res.send(results);
+	reservationServices.editReservation(req.body).then( results => {
+		res.send(null);
 	}, error => {
-		console.log(results)
+		console.log(error)
 		res.status(400).send();
 	}) 
-})
+});
 app.delete('/reservations', function(req, res) {
-	reservationsServices.deleteReservation(/* id da Reserva */).then( results => {
+	reservationServices.deleteReservation(/* id da Reserva */).then( results => {
 		res.send(results);
 	}, error => {
-		console.log(results)
+		console.log(error)
 		res.status(400).send();
 	}) 
-})
+});
 
 
 
-// xpara testar se ta chgando as info: app.use('/reservations', rotaReservations);
+// xpara testar se ta chgando as info: app.use('/reservations', reservationServices);
 
 app.listen(3000, function() {
     console.log("servidor rodando");
