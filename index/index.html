@@ -10,18 +10,57 @@
 	<link rel="stylesheet" type="text/css" href="css/jquery-ui.min.css">
 	<link href="jquery-ui.css" rel="stylesheet">
 	<style>
-	.ui-datepicker-inline  {
-		width: 100% !important;
+	.ui-datepicker-inline {
+	    width: 100% !important;
 	}
 
 	.vcenter {
-		display: inline-block;
-		vertical-align: middle;
-		float: none;
+	    display: inline-block;
+	    vertical-align: middle;
+	    float: none;
 	}
 
+	.voffset {
+	    margin-top: 2px;
+	}
 
+	.voffset1 {
+	    margin-top: 5px;
+	}
+
+	.voffset2 {
+	    margin-top: 10px;
+	}
+
+	.voffset3 {
+	    margin-top: 15px;
+	}
+
+	.voffset4 {
+	    margin-top: 30px;
+	}
+
+	.voffset5 {
+	    margin-top: 40px;
+	}
+
+	.voffset6 {
+	    margin-top: 60px;
+	}
+
+	.voffset7 {
+	    margin-top: 80px;
+	}
+
+	.voffset8 {
+	    margin-top: 100px;
+	}
+
+	.voffset9 {
+	    margin-top: 150px;
+	}
 	</style>
+
 
 </head>
 <body>
@@ -46,94 +85,30 @@
 				<thead>
 					<tr>
 						<th>
-							#
+							Responsável
 						</th>
 						<th>
-							Product
+							Horário
 						</th>
 						<th>
-							Payment Taken
+							
 						</th>
 						<th>
 							Status
 						</th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody data-bind="foreach: reservation">
 					<tr>
-						<td>
-							1
-						</td>
-						<td>
-							TB - Monthly
-						</td>
-						<td>
-							01/04/2012
-						</td>
-						<td>
-							Default
-						</td>
-					</tr>
-					<tr class="active">
-						<td>
-							1
-						</td>
-						<td>
-							TB - Monthly
-						</td>
-						<td>
-							01/04/2012
-						</td>
-						<td>
-							Approved
-						</td>
-					</tr>
-					<tr class="success">
-						<td>
-							2
-						</td>
-						<td>
-							TB - Monthly
-						</td>
-						<td>
-							02/04/2012
-						</td>
-						<td>
-							Declined
-						</td>
-					</tr>
-					<tr class="warning">
-						<td>
-							3
-						</td>
-						<td>
-							TB - Monthly
-						</td>
-						<td>
-							03/04/2012
-						</td>
-						<td>
-							Pending
-						</td>
-					</tr>
-					<tr class="danger">
-						<td>
-							4
-						</td>
-						<td>
-							TB - Monthly
-						</td>
-						<td>
-							04/04/2012
-						</td>
-						<td>
-							Call in to confirm
-						</td>
+						<td data-bind="text: name"></td>
+						<td data-bind="text: range"></td>
+						<td data-bind="text: start"></td>
+						<td data-bind="text: end"></td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
-		<div class="col-md-2 text-center ">
+		<div class="col-md-2 voffset7 text-center">
 
 					 <input type="button" value="Adicionar Reserva" data-toggle="modal" href="#modal-container-844475" id="modal-844475" class="btn btn-primary"/>
 
@@ -156,76 +131,12 @@
 						</th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody data-bind="foreach: reservation">
 					<tr>
-						<td>
-							1
-						</td>
-						<td>
-							TB - Monthly
-						</td>
-						<td>
-							01/04/2012
-						</td>
-						<td>
-							Default
-						</td>
-					</tr>
-					<tr class="active">
-						<td>
-							1
-						</td>
-						<td>
-							TB - Monthly
-						</td>
-						<td>
-							01/04/2012
-						</td>
-						<td>
-							Approved
-						</td>
-					</tr>
-					<tr class="success">
-						<td>
-							2
-						</td>
-						<td>
-							TB - Monthly
-						</td>
-						<td>
-							02/04/2012
-						</td>
-						<td>
-							Declined
-						</td>
-					</tr>
-					<tr class="warning">
-						<td>
-							3
-						</td>
-						<td>
-							TB - Monthly
-						</td>
-						<td>
-							03/04/2012
-						</td>
-						<td>
-							Pending
-						</td>
-					</tr>
-					<tr class="danger">
-						<td>
-							4
-						</td>
-						<td>
-							TB - Monthly
-						</td>
-						<td>
-							04/04/2012
-						</td>
-						<td>
-							Call in to confirm
-						</td>
+						<td data-bind="text: name"></td>
+						<td data-bind="text: range"></td>
+						<td data-bind="text: start"></td>
+						<td data-bind="text: end"></td>
 					</tr>
 				</tbody>
 			</table>
