@@ -1,98 +1,405 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-    <meta charset="utf-8">
-    <title>Cookie Manager</title>
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-    <link href="jquery-ui.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/jquery-ui.theme.css">
-    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
-    <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
-    <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-    <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
-    <style type="text/css">
-    body {
-        padding-top: 70px;
-        /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
-    }
-    </style>
+	<meta charset="utf-8">
+
+
+	<title>Cookie Manager</title>
+
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="css/jquery-ui.min.css">
+	<link href="jquery-ui.css" rel="stylesheet">
+	<style>
+	.ui-datepicker-inline  {
+		width: 100% !important;
+	}
+
+	.vcenter {
+		display: inline-block;
+		vertical-align: middle;
+		float: none;
+	}
+
+
+	</style>
+
 </head>
-
 <body>
-    <!-- Page Content -->
+
+	<div class="row">
+		<div class="col-md-4">
+		</div>
+
+		<div class="col-md-4">
+			<h2 class="demoHeaders">Datepicker</h2>
+			<div id="datepicker"></div>
+		</div>
+
+		<div class="col-md-4">
+		</div>
+	</div>
 
 
-    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#form-content">
-        Nova reserva
-    </button>
+	<div class="row">
+		<div class="col-md-5">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>
+							#
+						</th>
+						<th>
+							Product
+						</th>
+						<th>
+							Payment Taken
+						</th>
+						<th>
+							Status
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							1
+						</td>
+						<td>
+							TB - Monthly
+						</td>
+						<td>
+							01/04/2012
+						</td>
+						<td>
+							Default
+						</td>
+					</tr>
+					<tr class="active">
+						<td>
+							1
+						</td>
+						<td>
+							TB - Monthly
+						</td>
+						<td>
+							01/04/2012
+						</td>
+						<td>
+							Approved
+						</td>
+					</tr>
+					<tr class="success">
+						<td>
+							2
+						</td>
+						<td>
+							TB - Monthly
+						</td>
+						<td>
+							02/04/2012
+						</td>
+						<td>
+							Declined
+						</td>
+					</tr>
+					<tr class="warning">
+						<td>
+							3
+						</td>
+						<td>
+							TB - Monthly
+						</td>
+						<td>
+							03/04/2012
+						</td>
+						<td>
+							Pending
+						</td>
+					</tr>
+					<tr class="danger">
+						<td>
+							4
+						</td>
+						<td>
+							TB - Monthly
+						</td>
+						<td>
+							04/04/2012
+						</td>
+						<td>
+							Call in to confirm
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="col-md-2 text-center ">
+
+					 <input type="button" value="Adicionar Reserva" data-toggle="modal" href="#modal-container-844475" id="modal-844475" class="btn btn-primary"/>
+
+		</div>
+		<div class="col-md-5">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>
+							#
+						</th>
+						<th>
+							Product
+						</th>
+						<th>
+							Payment Taken
+						</th>
+						<th>
+							Status
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							1
+						</td>
+						<td>
+							TB - Monthly
+						</td>
+						<td>
+							01/04/2012
+						</td>
+						<td>
+							Default
+						</td>
+					</tr>
+					<tr class="active">
+						<td>
+							1
+						</td>
+						<td>
+							TB - Monthly
+						</td>
+						<td>
+							01/04/2012
+						</td>
+						<td>
+							Approved
+						</td>
+					</tr>
+					<tr class="success">
+						<td>
+							2
+						</td>
+						<td>
+							TB - Monthly
+						</td>
+						<td>
+							02/04/2012
+						</td>
+						<td>
+							Declined
+						</td>
+					</tr>
+					<tr class="warning">
+						<td>
+							3
+						</td>
+						<td>
+							TB - Monthly
+						</td>
+						<td>
+							03/04/2012
+						</td>
+						<td>
+							Pending
+						</td>
+					</tr>
+					<tr class="danger">
+						<td>
+							4
+						</td>
+						<td>
+							TB - Monthly
+						</td>
+						<td>
+							04/04/2012
+						</td>
+						<td>
+							Call in to confirm
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
 
 
 
 
-    <!-- modal -->
-    <div id="form-content" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <form class="newReservation" name="newReservation">
-                                    <label>Nome do responsável: </label>
-                                    <input class="form-control" type="text" name="requesterName" value="">
+	<!-- <div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>
+								#
+							</th>
+							<th>
+								Product
+							</th>
+							<th>
+								Payment Taken
+							</th>
+							<th>
+								Status
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>
+								1
+							</td>
+							<td>
+								TB - Monthly
+							</td>
+							<td>
+								01/04/2012
+							</td>
+							<td>
+								Default
+							</td>
+						</tr>
+						<tr class="active">
+							<td>
+								1
+							</td>
+							<td>
+								TB - Monthly
+							</td>
+							<td>
+								01/04/2012
+							</td>
+							<td>
+								Approved
+							</td>
+						</tr>
+						<tr class="success">
+							<td>
+								2
+							</td>
+							<td>
+								TB - Monthly
+							</td>
+							<td>
+								02/04/2012
+							</td>
+							<td>
+								Declined
+							</td>
+						</tr>
+						<tr class="warning">
+							<td>
+								3
+							</td>
+							<td>
+								TB - Monthly
+							</td>
+							<td>
+								03/04/2012
+							</td>
+							<td>
+								Pending
+							</td>
+						</tr>
+						<tr class="danger">
+							<td>
+								4
+							</td>
+							<td>
+								TB - Monthly
+							</td>
+							<td>
+								04/04/2012
+							</td>
+							<td>
+								Call in to confirm
+							</td>
+						</tr>
+					</tbody>
+				</table> -->
+				<div class="row">
+					<div class="col-md-6">
 
-                                    <label>Dia e horário desejado: 
-                                    <!-- auto-filled but accepts changes -->
-                                    <input class="form-control" type="text" name="date" value="">
-                                    </label>
-                                    <div class="form-group">
-                                        Sala: <br />
-                                        <label for="bolacha">
-                                            <input class="form-control" type="radio" name="roomId" value="bolacha"> Bolacha
-                                        </label>
-                                        <label for="biscoito">
-                                            <input class="form-control" type="radio" name="roomId" value="bisoito"> Biscoito
-                                        </label>
-                                    </div>
-                                </form>    
-                            </div>
-                        </div>
-                        <!-- /.row -->
-                    </div>
-                    <div class="modal-footer">
 
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" id="submit">Save changes</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+						<div class="modal fade" id="modal-container-844475" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+
+										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+											×
+										</button>
+										<h4 class="modal-title" id="myModalLabel">
+											Modal title
+										</h4>
+									</div>
+									<div class="modal-body">
+
+											<form role="form">
+												<div class="form-group">
+													<label for="exampleInputEmail1">
+														Nome
+													</label>
+													<input class="form-control" id="exampleInputEmail1"/>
+												</div>
+
+												<div class="form-group">
+													<div class="radio">
+													  <label>
+													    <input type="radio" name="radioSalas" id="idRadioBolacha" value="bolacha" aria-label="...">
+															Bolacha
+														</label>
+														<label >
+															<input type="radio" name="radioSalas" id="idRadioBiscoito" value="biscoito" aria-label="...">
+															Biscoito
+													  </label>
+													</div>
+												</div>
 
 
-    <!-- end-modal -->
 
-    <script src="js/knockout-4.3.2.js"></script>
-    <script src="js/bootstrap.js"></script>
-    <script src="js/index.js"></script>
-    <script type="text/javascript">
-    $ = jQuery;
-    $('input[name="date"]').daterangepicker({
-        "timePicker": true,
-        "startDate": "07/04/2017",
-        "endDate": "07/10/2017"
-    }, function(start, end, label) {
-        console.log("New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')");
-    });
-    </script>
+
+
+												<button type="submit" class="btn btn-primary">
+													Submit
+												</button>
+												<button type="button" class="btn btn-default" data-dismiss="modal">
+													Close
+												</button>
+											</form>
+
+									</div>
+
+
+							</div>
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="js/jquery.js"></script>
+	<script src="js/jquery-ui.js"></script>
+	<script type="text/javascript" src="js/bootstrap.js"></script>
+
+	<script type="text/javascript">
+		$('#datepicker').datepicker();
+	</script>
 </body>
-
-
-
-
 </html>
+
+<!-- modal -->
