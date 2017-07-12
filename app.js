@@ -49,7 +49,7 @@ app.put('/reservations', function(req, res) {
 	}) 
 });
 app.delete('/reservations', function(req, res) {
-	reservationServices.deleteReservation(/* id da Reserva */).then( results => {
+	reservationServices.deleteReservation(req.body).then( results => {
 		res.send(results);
 	}, error => {
 		console.log(error)

@@ -78,10 +78,11 @@ function editReservation(editedReservation){
 function deleteReservation(reservationId){
 
     return new Promise( (resolve, reject) => {
+    	const {id} = reservationId; 
 
     	let connection = getConnection();
 
-	    connection.query('DELETE FROM `reservation` WHERE `id`=?' [reservationid], function(err, res){
+	    connection.query(`DELETE FROM reservation WHERE Id=${id}`, function(err, res){
 	        connection.end();
 
 	        if(err)
@@ -101,7 +102,9 @@ function getReservation(reservationId) {
 
     	let connection = getConnection();
 
-	    connection.query('select * from reservation WHERE `id`=?' [reservationid], function(err, res){
+    	let queryTemp = `select * from reservation WHERE Id=${reservationId}`;
+    	console.log(queryTemp);
+	    connection.query(queryTemp, function(err, res){
 	    	connection.end();
 	        if(err)
 	        	return reject(err);
