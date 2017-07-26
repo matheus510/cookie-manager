@@ -14,10 +14,42 @@ function getList(){
 
 	        return resolve(res);
 	    });
+    });   
+};
 
-    })
-    
-    
+function getRoomList() {
+
+    return new Promise( (resolve, reject) => {
+
+	    let connection = getConnection();
+
+	    connection.query('select * from room', function(err, res){
+	       	connection.end();
+
+	        if(err)
+	        	return reject(err);
+
+	        return resolve(res);
+	    });
+    });	
+};
+
+function getRoomReservationList(roomId) {
+	return new Promise( (resolve, reject) => {
+
+		const {id} = roomId; 
+
+	    let connection = getConnection();
+		
+	    connection.query(`select * from reservation where RoomId=${id}`, function(err, res){
+	       	connection.end();
+
+	        if(err)
+	        	return reject(err);
+
+	        return resolve(res);
+	    });
+    });	
 }
 
 function addReservation(newReservation){
@@ -90,11 +122,8 @@ function deleteReservation(reservationId){
 
 	        return resolve(res);
 	    });
-
-    })
- 
-    
-}
+    });   
+};
 
 function getReservation(reservationId) {
 
@@ -111,14 +140,13 @@ function getReservation(reservationId) {
 
 	        return resolve(res);
 	    });
-
     })
- 
-    
 }
 
 module.exports = {
 	getList,
+	getRoomList,
+	getRoomReservationList,
 	addReservation,
 	editReservation,
 	deleteReservation,

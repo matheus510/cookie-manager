@@ -18,6 +18,24 @@ app.get('/reservations', function(req, res) {
 	})
 });
 
+app.get('/room', function(req, res) {
+	reservationServices.getRoomList().then( results => {
+		console.log(results);
+		res.send(results);
+	}, error => {
+		res.status(400).send();
+	})
+});
+
+app.get('/room/:id', function(req, res) {
+	reservationServices.getRoomReservationList(req.params.id).then( results => {
+		console.log(results);
+		res.send(results);
+	}, error => {
+		res.status(400).send();
+	})
+});
+
 app.get('/reservations/:id', function(req, res) {
 	reservationServices.getReservation(req.params.id).then( results => {
 		console.log(results);
