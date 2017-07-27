@@ -75,10 +75,6 @@ app.delete('/reservations/:id', function(req, res) {
     })
 });
 
-
-
-// xpara testar se ta chgando as info: app.use('/reservations', reservationServices);
-
 app.listen(3000, function() {
     console.log("servidor rodando");
 })

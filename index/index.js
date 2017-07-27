@@ -64,6 +64,16 @@ function loadRoomReservationList(room) {
 }
 
 function addReservation() {
+    $.ajax({
+        url: '/reservation',
+        type: 'post',
+        dataType: 'json',
+        data: ,
+        success: function(data) {
+
+            room.roomReservationList.push(data);
+        }
+    });
     self.dayReservations.push(self.dayReservation());
 
 }
@@ -74,9 +84,6 @@ function removeReservation(reservationId) {
         type: 'delete',
         success: function(data) {
 
-        },
-        fail: function() {
-            console.log('Deletion failed')
         }
     });
 }
