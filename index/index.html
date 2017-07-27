@@ -1,221 +1,220 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<meta charset="utf-8">
+    <meta charset="utf-8">
 
 
-	<title>Cookie Manager</title>
+    <title>Cookie Manager</title>
 
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-	<link rel="stylesheet" type="text/css" href="css/jquery-ui.min.css">
-	<link href="jquery-ui.css" rel="stylesheet">
-	<style>
-	.ui-datepicker-inline {
-	    width: 100% !important;
-	}
-
-	.vcenter {
-	    display: inline-block;
-	    vertical-align: middle;
-	    float: none;
-	}
-
-	.voffset {
-	    margin-top: 2px;
-	}
-
-	.voffset1 {
-	    margin-top: 5px;
-	}
-
-	.voffset2 {
-	    margin-top: 10px;
-	}
-
-	.voffset3 {
-	    margin-top: 15px;
-	}
-
-	.voffset4 {
-	    margin-top: 30px;
-	}
-
-	.voffset5 {
-	    margin-top: 40px;
-	}
-
-	.voffset6 {
-	    margin-top: 60px;
-	}
-
-	.voffset7 {
-	    margin-top: 80px;
-	}
-
-	.voffset8 {
-	    margin-top: 100px;
-	}
-
-	.voffset9 {
-	    margin-top: 150px;
-	}
-	</style>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery-ui.min.css">
+    <link href="jquery-ui.css" rel="stylesheet">
+    <style>
+        .ui-datepicker-inline {
+            width: 100% !important;
+        }
+        
+        .vcenter {
+            display: inline-block;
+            vertical-align: middle;
+            float: none;
+        }
+        
+        .voffset {
+            margin-top: 2px;
+        }
+        
+        .voffset1 {
+            margin-top: 5px;
+        }
+        
+        .voffset2 {
+            margin-top: 10px;
+        }
+        
+        .voffset3 {
+            margin-top: 15px;
+        }
+        
+        .voffset4 {
+            margin-top: 30px;
+        }
+        
+        .voffset5 {
+            margin-top: 40px;
+        }
+        
+        .voffset6 {
+            margin-top: 60px;
+        }
+        
+        .voffset7 {
+            margin-top: 80px;
+        }
+        
+        .voffset8 {
+            margin-top: 100px;
+        }
+        
+        .voffset9 {
+            margin-top: 150px;
+        }
+    </style>
 
 
 </head>
+
 <body>
 
-	<div class="row">
-		<div class="col-md-4">
-		</div>
+    <div class="row">
+        <div class="col-md-4">
+        </div>
 
-		<div class="col-md-4">
-			<h2 class="demoHeaders">Datepicker</h2>
-			<div id="datepicker"></div>
-		</div>
+        <div class="col-md-4">
+            <h2 class="demoHeaders">Datepicker</h2>
+            <div id="datepicker"></div>
+        </div>
 
-		<div class="col-md-4">
-		</div>
-	</div>
-
-
-	<div class="row">
-		<div class="col-md-5">
-			<table class="table">
-				<thead>
-					<tr>
-						<th>
-							Responsável
-						</th>
-						<th>
-							Horário
-						</th>
-						<th>
-							
-						</th>
-						<th>
-							Status
-						</th>
-					</tr>
-				</thead>
-				<tbody data-bind="foreach: ">
-					<tr>
-						<td data-bind="text: name"></td>
-						<td data-bind="text: range"></td>
-						<td data-bind="text: start"></td>
-						<td data-bind="text: end"></td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-		<div class="col-md-2 voffset7 text-center">
-
-					 <input type="button" value="Adicionar Reserva" data-toggle="modal" href="#modal-container-844475" id="modal-844475" class="btn btn-primary"/>
-
-		</div>
-		<div class="col-md-5">
-			<table class="table">
-				<thead>
-					<tr>
-						<th>
-							#
-						</th>
-						<th>
-							Product
-						</th>
-						<th>
-							Payment Taken
-						</th>
-						<th>
-							Status
-						</th>
-					</tr>
-				</thead>
-				<tbody data-bind="foreach: reservations">
-					<tr>
-						<td data-bind="text: name"></td>
-						<td data-bind="text: range"></td>
-						<td data-bind="text: start"></td>
-						<td data-bind="text: end"></td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-	</div>
+        <div class="col-md-4">
+        </div>
+    </div>
 
 
-				<div class="row">
-					<div class="col-md-6">
+    <div class="row">
+        <div class="col-md-5">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Responsável
+                        </th>
+                        <th>
+                            Horário
+                        </th>
+                        <th>
 
+                        </th>
+                        <th>
+                            Status
+                        </th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach: ">
+                    <tr>
+                        <td data-bind="text: name"></td>
+                        <td data-bind="text: range"></td>
+                        <td data-bind="text: start"></td>
+                        <td data-bind="text: end"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-2 voffset7 text-center">
 
-						<div class="modal fade" id="modal-container-844475" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-							<div class="modal-dialog">
-								<div class="modal-content">
-									<div class="modal-header">
+            <input type="button" value="Adicionar Reserva" data-toggle="modal" href="#modal-container-844475" id="modal-844475" class="btn btn-primary" />
 
-										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-											×
-										</button>
-										<h4 class="modal-title" id="myModalLabel">
-											Modal title
-										</h4>
-									</div>
-									<div class="modal-body">
+        </div>
+        <div class="col-md-5">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            #
+                        </th>
+                        <th>
+                            Product
+                        </th>
+                        <th>
+                            Payment Taken
+                        </th>
+                        <th>
+                            Status
+                        </th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach: reservations">
+                    <tr>
+                        <td data-bind="text: name"></td>
+                        <td data-bind="text: range"></td>
+                        <td data-bind="text: start"></td>
+                        <td data-bind="text: end"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
-											<form role="form">
-												<div class="form-group">
-													<label for="exampleInputEmail1">
-														Nome
-													</label>
-													<input class="form-control" id="exampleInputEmail1"/>
-												</div>
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
 
-												<div class="form-group">
-													<div class="radio">
-													  <label>
-													    <input type="radio" name="radioSalas" id="idRadioBolacha" value="bolacha" aria-label="...">
-															Bolacha
-														</label>
-														<label >
-															<input type="radio" name="radioSalas" id="idRadioBiscoito" value="biscoito" aria-label="...">
-															Biscoito
-													  </label>
-													</div>
-												</div>
-
-
-
-
-
-												<button type="submit" class="btn btn-primary">
-													Submit
-												</button>
-												<button type="button" class="btn btn-default" data-dismiss="modal">
-													Close
-												</button>
-											</form>
-
-									</div>
-
-
-							</div>
-
-						</div>
-
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<script src="js/jquery.js"></script>
-	<script src="js/jquery-ui.js"></script>
-	<script type="text/javascript" src="js/bootstrap.js"></script>
-
-	<script type="text/javascript">
-		$('#datepicker').datepicker();
-	</script>
+    <script type="text/javascript">
+        $('#datepicker').datepicker();
+    </script>
 </body>
+
 </html>
 
 <!-- modal -->
+
+<div class="row">
+    <div class="col-md-6">
+
+
+        <div class="modal fade" id="modal-container-844475" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+							×
+						</button>
+                        <h4 class="modal-title" id="myModalLabel">
+                            Modal title
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <form role="form">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">
+									Nome
+								</label>
+                                <input class="form-control" id="exampleInputEmail1" />
+                            </div>
+
+                            <div class="form-group">
+                                <div class="radio">
+                                    <label>
+										<input type="radio" name="radioSalas" id="idRadioBolacha" value="bolacha" aria-label="...">
+										Bolacha
+									</label>
+                                    <label>
+										<input type="radio" name="radioSalas" id="idRadioBiscoito" value="biscoito" aria-label="...">
+										Biscoito
+									</label>
+                                </div>
+                            </div>
+
+
+
+
+
+                            <button type="submit" class="btn btn-primary">
+								Submit
+							</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">
+								Close
+							</button>
+                        </form>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
