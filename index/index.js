@@ -30,6 +30,7 @@ function RoomModel() {
 
     self.roomName = ko.observableArray();
     self.roomId = ko.observableArray();
+    self.roomReservation = ko.observable(new ReservationModel());
     self.roomReservationList = ko.observableArray();
 }
 
@@ -59,6 +60,18 @@ function loadRoomReservationList(room) {
         dataType: 'json',
         success: function(data) {
             room.roomReservationList.push(data);
+            ko.mapping.fromJS(reservation, {
+                reservationRoom: {
+                    create: function(options) {
+                        var reservationRoom = new roomModel();
+
+                        ko.mapping.fromJS(options.data, {}, reservationRoom);
+
+                        return reservationRoom;
+                    }
+                }
+            }, self.roomReservation);
+            self.roomReservationList.push(self.roomReservation);
         }
     });
 }
