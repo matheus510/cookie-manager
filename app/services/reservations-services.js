@@ -55,16 +55,16 @@ function getRoomReservationList(roomId) {
 function addReservation(newReservation){
 
     return new Promise( (resolve, reject) => {
-    	const {date, start, end, nameReq, room} = newReservation; 
+    	const {DateReserve, StartHour, EndHour, Name, RoomId} = newReservation; 
 
     	let connection = getConnection();
 
     	let queryTemp = `INSERT INTO reservation (DateReserve, StartHour, EndHour, Name, RoomId)
-	    				 VALUES (STR_TO_DATE("${date}",'%d-%m-%Y'),
-	    				 		 STR_TO_DATE("${start}",'%H:%i:%s'),
-	    				 		 STR_TO_DATE("${end}",'%H:%i:%s'),
-	    				 		 "${nameReq}",
-	    				 		 "${room}")`;
+	    				 VALUES (STR_TO_DATE("${DateReserve}",'%d-%m-%Y'),
+	    				 		 STR_TO_DATE("${StartHour}",'%H:%i:%s'),
+	    				 		 STR_TO_DATE("${EndHour}",'%H:%i:%s'),
+	    				 		 "${Name}",
+	    				 		 "${RoomId}")`;
 
 	    console.log(queryTemp);
 	    connection.query(queryTemp, function(err, res){
@@ -86,11 +86,12 @@ function addReservation(newReservation){
 function editReservation(editedReservation){
 
     return new Promise( (resolve, reject) => {
-    	const {id, date, start, end, nameReq, room} = editedReservation; 
+    	const {Id, DateReserve, StartHour, EndHour, Name, RoomId} = editedReservation; 
 
     	let connection = getConnection();
 
-    	let queryTemp = `UPDATE reservation SET DateReserve=DATE(STR_TO_DATE("${date}",'%d-%m-%Y')), StartHour=DATE(STR_TO_DATE("${start}",'%H:%i:%s')), EndHour=DATE(STR_TO_DATE("${end}",'%H:%i:%s')), Name="${nameReq}", RoomId="${room}" WHERE Id=${id}`;
+		let queryTemp = `UPDATE reservation SET 
+						DateReserve=STR_TO_DATE("${DateReserve}","%d-%m-%Y"), StartHour=STR_TO_DATE("${StartHour}","%H:%i:%s"), EndHour=STR_TO_DATE("${EndHour}","%H:%i:%s"), Name="${Name}", RoomId=${RoomId} WHERE Id=${Id}`;
 
     	console.log(queryTemp);
 	    connection.query(queryTemp, function(err, res){
@@ -110,11 +111,10 @@ function editReservation(editedReservation){
 function deleteReservation(reservationId){
 
     return new Promise( (resolve, reject) => {
-    	const {id} = reservationId; 
 
     	let connection = getConnection();
 
-	    connection.query(`DELETE FROM reservation WHERE Id=${id}`, function(err, res){
+	    connection.query(`DELETE FROM reservation WHERE Id=${reservationId}`, function(err, res){
 	        connection.end();
 
 	        if(err)

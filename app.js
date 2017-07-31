@@ -9,7 +9,7 @@ function logMe(req, res, next) {
 }
 app.use(bodyParser());
 
-app.get('/reservations', function(req, res) {
+app.get('/reservation', function(req, res) {
     reservationServices.getList().then(results => {
         console.log(results);
         res.send(results);
@@ -36,7 +36,7 @@ app.get('/room/:id', function(req, res) {
     })
 });
 
-app.get('/reservations/:id', function(req, res) {
+app.get('/reservation/:id', function(req, res) {
     reservationServices.getReservation(req.params.id).then(results => {
         console.log(results);
         res.send(results);
@@ -46,7 +46,7 @@ app.get('/reservations/:id', function(req, res) {
 });
 
 
-app.post('/reservations', function(req, res) {
+app.post('/reservation', function(req, res) {
     console.log(req.body);
 
     reservationServices.addReservation(req.body).then(results => {
@@ -58,7 +58,7 @@ app.post('/reservations', function(req, res) {
     })
 });
 
-app.put('/reservations', function(req, res) {
+app.put('/reservation', function(req, res) {
     reservationServices.editReservation(req.body).then(results => {
         res.send(null);
     }, error => {
@@ -66,7 +66,7 @@ app.put('/reservations', function(req, res) {
         res.status(400).send();
     })
 });
-app.delete('/reservations/:id', function(req, res) {
+app.delete('/reservation/:id', function(req, res) {
     reservationServices.deleteReservation(req.params.id).then(results => {
         res.send(results);
     }, error => {

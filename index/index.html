@@ -3,10 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-
-
     <title>Cookie Manager</title>
-
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="css/jquery-ui.min.css">
     <link href="jquery-ui.css" rel="stylesheet">
@@ -61,28 +58,24 @@
             margin-top: 150px;
         }
     </style>
-
-
 </head>
 
 <body>
-
     <div class="row">
         <div class="col-md-4">
         </div>
-
+        
         <div class="col-md-4">
             <h2 class="demoHeaders">Datepicker</h2>
             <div id="datepicker"></div>
         </div>
-
+        
         <div class="col-md-4">
         </div>
     </div>
-
-
     <div class="row">
         <div class="col-md-5">
+            <h3>Bolacha</h3>
             <table class="table">
                 <thead>
                     <tr>
@@ -93,7 +86,7 @@
                             Horário
                         </th>
                         <th>
-
+                            
                         </th>
                         <th>
                             Status
@@ -111,10 +104,9 @@
             </table>
         </div>
         <div class="col-md-2 voffset7 text-center">
-
             <input type="button" value="Adicionar Reserva" data-toggle="modal" href="#modal-container-844475" id="modal-844475" class="btn btn-primary" />
-
         </div>
+        <h3>Biscoito</h3>
         <div class="col-md-5">
             <table class="table">
                 <thead>
@@ -144,13 +136,14 @@
             </table>
         </div>
     </div>
-
+    
     <script src="js/jquery.js"></script>
     <script src="js/jquery-ui.js"></script>
     <script type="text/javascript" src="js/bootstrap.js"></script>
     <script src="js/knockout_3.4.0/knockout-3.4.0.js"></script>
     <script src="js/knockout_mapping/build/output/custom.knockout.mapping-latest.debug.js"></script>
-
+    <script src="index.js"></script>
+    
     <script type="text/javascript">
         $('#datepicker').datepicker();
     </script>
@@ -162,13 +155,11 @@
 
 <div class="row">
     <div class="col-md-6">
-
-
         <div class="modal fade" id="modal-container-844475" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-
+                        
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
 							×
 						</button>
@@ -177,7 +168,7 @@
                         </h4>
                     </div>
                     <div class="modal-body">
-
+                        
                         <form role="form">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">
@@ -185,7 +176,7 @@
 								</label>
                                 <input class="form-control" id="exampleInputEmail1" />
                             </div>
-
+                            
                             <div class="form-group">
                                 <div class="radio">
                                     <label>
@@ -198,11 +189,6 @@
 									</label>
                                 </div>
                             </div>
-
-
-
-
-
                             <button type="submit" class="btn btn-primary">
 								Submit
 							</button>
@@ -210,13 +196,9 @@
 								Close
 							</button>
                         </form>
-
                     </div>
-
-
                 </div>
-
             </div>
-
         </div>
     </div>
+</div>    
