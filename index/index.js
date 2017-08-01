@@ -1,18 +1,29 @@
 function AppViewModel() {
     var self = this;
     
-    self.reservationModule = ko.observable(new ReservationModuleModel());
+    self.reservationModule = new ReservationModuleModel();
+    self.reservationModule.loadRoomList();
+    debugger;
+    for (var i = 0, iLen = self.reservationModule.roomList.lenght; i < iLen; i++) {        
+        debugger;
+        self.reservationModule.loadRoomReservationList(self.reservationModule.roomList[i]);
+        console.log(room.id)
+    }
+
 }
 
 function ReservationModuleModel() {
     var self = this;
     
     self.reservation = ko.observable(new ReservationModel());
-    self.roomList = ko.observableArray();
+    self.roomList = [];
 
     self.loadReservation = function (reservationId) {
         $.ajax({
-            url:'reservation' + reservationId,
+            url:'http://localhost:3000/reservation' + reservationId,
+            headers: {
+                "Access-Control-Allow-Origin":"*"
+            },
             type: 'get',
             dataType: 'json',
             success: function (data) {
@@ -23,7 +34,7 @@ function ReservationModuleModel() {
     }
     self.removeReservation = function (reservationId) {
         $.ajax({
-            url: '/reservation/' + reservationId,
+            url: 'http://localhost:3000/reservation/' + reservationId,
             type: 'delete',
             success: function (data) {
                 console.log('Reservation deleted :o')
@@ -32,7 +43,7 @@ function ReservationModuleModel() {
     }
     self.addReservation = function (reservation) {
         $.ajax({
-            url: '/reservation',
+            url: 'http://localhost:3000/reservation',
             type: 'post',
             dataType: 'json',
             data: ko.toJSON(reservation),
@@ -44,7 +55,7 @@ function ReservationModuleModel() {
     }
     self.editReservation = function (reservation) {
         $.ajax({
-            url: '/reservation/' + reservation.id,
+            url: 'http://localhost:3000/reservation/' + reservation.id,
             type: 'put',
             dataType: 'json',
             data: ko.toJSON(reservation),
@@ -55,17 +66,23 @@ function ReservationModuleModel() {
     }
     self.loadRoomList = function () {
         $.ajax({
-            url: '/room',
+            url: 'http://localhost:3000/room',
             type: 'get',
             dataType: 'json',
             success: function (data) {
-                for(var i = 0, iLen = data.lenght; i < iLen; i++) {
-                    if (self.roomList.indexOf(data[i].roomId) === -1) {
-                        data[i] = new RoomModel();
-                        self.roomList.push(data[i]);
+                if (data) {
+                    debugger;
+                    for(var i = 0, iLen = data.lenght; i < iLen; i++) {
+                        debugger;
+                        if (self.roomList.indexOf(data[i].roomId) === -1) {
+                            data[i] = new RoomModel();
+                            self.roomList.push(data[i]);
+                            
+                        }
                     }
+                    return self.roomList
                 }
-                /*ko.utils.arrayForEach(data, function (room) {
+                    /*ko.utils.arrayForEach(data, function (room) {
                     if (self.roomList.indexOf(room.roomId) === -1) {
                         room = new RoomModel();
                         self.roomList.push(room);
@@ -76,8 +93,8 @@ function ReservationModuleModel() {
     } 
     
     self.loadRoomReservationList = function (room) {
-        $.ajax({
-            url: '/reservation/' + room.roomId,
+        return $.ajax({
+            url: 'http://localhost:3000/reservation/' + room.roomId,
             type: 'get',
             data: data,
             dataType: 'json',
@@ -87,13 +104,6 @@ function ReservationModuleModel() {
             }
         });
     }
-    debugger;
-    self.loadRoomList();
-    debugger;
-    ko.utils.arrayForEach(self.roomList, function (room) {
-        self.loadRoomReservationList(room);
-        console.log(room.id)
-    })
 }
 
 
@@ -118,6 +128,8 @@ function ReservationModel() {
     })
 }
 
-
 let app = new AppViewModel();
 ko.applyBindings(app);
+
+
+

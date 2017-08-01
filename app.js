@@ -7,11 +7,14 @@ function logMe(req, res, next) {
 
     next();
 }
+//app.use('Access-Control-Allow-Origin','*');
 app.use(bodyParser());
+
 
 app.get('/reservation', function(req, res) {
     reservationServices.getList().then(results => {
         console.log(results);
+        res.setHeader("Access-Control-Allow-Origin", "*")
         res.send(results);
     }, error => {
         res.status(400).send();
@@ -21,8 +24,11 @@ app.get('/reservation', function(req, res) {
 app.get('/room', function(req, res) {
     reservationServices.getRoomList().then(results => {
         console.log(results);
-        res.send(results);
+        res.setHeader("Access-Control-Allow-Origin", "*")
+        res.send(results)
+        
     }, error => {
+        res.setHeader("Access-Control-Allow-Origin", "*")
         res.status(400).send();
     })
 });
@@ -30,6 +36,7 @@ app.get('/room', function(req, res) {
 app.get('/room/:id', function(req, res) {
     reservationServices.getRoomReservationList(req.params.id).then(results => {
         console.log(results);
+        res.setHeader("Access-Control-Allow-Origin", "*")
         res.send(results);
     }, error => {
         res.status(400).send();
@@ -39,6 +46,7 @@ app.get('/room/:id', function(req, res) {
 app.get('/reservation/:id', function(req, res) {
     reservationServices.getReservation(req.params.id).then(results => {
         console.log(results);
+        res.setHeader("Access-Control-Allow-Origin", "*")
         res.send(results);
     }, error => {
         res.status(400).send();
@@ -50,7 +58,7 @@ app.post('/reservation', function(req, res) {
     console.log(req.body);
 
     reservationServices.addReservation(req.body).then(results => {
-        console.log(2);
+        res.setHeader("Access-Control-Allow-Origin", "*")
         res.send(null)
     }, error => {
         console.log(error)
@@ -60,6 +68,7 @@ app.post('/reservation', function(req, res) {
 
 app.put('/reservation', function(req, res) {
     reservationServices.editReservation(req.body).then(results => {
+        res.setHeader("Access-Control-Allow-Origin", "*")
         res.send(null);
     }, error => {
         console.log(error)
@@ -68,6 +77,7 @@ app.put('/reservation', function(req, res) {
 });
 app.delete('/reservation/:id', function(req, res) {
     reservationServices.deleteReservation(req.params.id).then(results => {
+        res.setHeader("Access-Control-Allow-Origin", "*")
         res.send(results);
     }, error => {
         console.log(error)

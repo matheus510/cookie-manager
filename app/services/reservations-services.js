@@ -24,6 +24,7 @@ function getRoomList() {
 	    let connection = getConnection();
 
 	    connection.query('select * from room', function(err, res){
+			
 	       	connection.end();
 
 	        if(err)
