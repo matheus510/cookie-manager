@@ -1,14 +1,27 @@
 function AppViewModel() {
-    var self = this;
+    var self = this
     
-    self.reservationModule = ko.observable(new ReservationModuleModel());
+    self.agenda = ko.observable(new agendaModel())
+    self.roomList = ko.observableArray()
+
+    self.loadRoomList = function (day) {
+        $.ajax({
+            url: '/room',
+            type: 'get',
+            dataType: 'json',
+            success: function (data) {
+               
+            }
+        })
+    } 
 }
 
-function ReservationModuleModel() {
-    var self = this;
+function agendaModel() {
+    var self = this
     
-    self.reservation = ko.observable(new ReservationModel());
-    self.roomList = ko.observableArray();
+    self.reservation = ko.observable(new ReservationModel())
+    self.day = ko.observable(null)
+    self.reservationList = ko.observableArray()
 
     self.loadReservation = function (reservationId) {
         $.ajax({
@@ -16,7 +29,7 @@ function ReservationModuleModel() {
             type: 'get',
             dataType: 'json',
             success: function (data) {
-                ko.mapping.fromJS(reservation, {}, self.reservation);
+                ko.mapping.fromJS(reservation, {}, self.reservation)
                 console.log(data)
             }
         })
@@ -28,7 +41,7 @@ function ReservationModuleModel() {
             success: function (data) {
                 console.log('Reservation deleted :o')
             }
-        });
+        })
     }
     self.addReservation = function (reservation) {
         $.ajax({
@@ -40,7 +53,7 @@ function ReservationModuleModel() {
                 //log that the reservertion were added
                 console.log('Reserve added :)')
             }
-        });     
+        })     
     }
     self.editReservation = function (reservation) {
         $.ajax({
@@ -51,73 +64,58 @@ function ReservationModuleModel() {
             success: function(data) {
                 alert('Reserve deleted :)')
             }
-        });
+        })
     }
-    self.loadRoomList = function () {
-        $.ajax({
-            url: '/room',
-            type: 'get',
-            dataType: 'json',
-            success: function (data) {
-                for(var i = 0, iLen = data.lenght; i < iLen; i++) {
-                    if (self.roomList.indexOf(data[i].roomId) === -1) {
-                        data[i] = new RoomModel();
-                        self.roomList.push(data[i]);
-                    }
-                }
-                /*ko.utils.arrayForEach(data, function (room) {
-                    if (self.roomList.indexOf(room.roomId) === -1) {
-                        room = new RoomModel();
-                        self.roomList.push(room);
-                    }
-                })*/
-            }
-        });
-    } 
     
-    self.loadRoomReservationList = function (room) {
+    self.loadDayReservationList = function (day) {
+        if (!day) day = moment() 
+
         $.ajax({
-            url: '/reservation/' + room.roomId,
+            url: '/' + day,
             type: 'get',
             data: data,
             dataType: 'json',
             success: function (data) {
-                room.roomReservationList.push(data);
-                ko.mapping.fromJS(reservation, {}, self.roomReservationList);
+                ko.mapping.fromJS(data, {
+                    'reservation': {
+                        create: function(options) {
+                            return new ReservationModel(options.data);
+                        }
+                    }
+                }, self.roomReservationList)
             }
-        });
+        })
     }
-    debugger;
-    self.loadRoomList();
-    debugger;
+
+    self.loadRoomList()
+
     ko.utils.arrayForEach(self.roomList, function (room) {
-        self.loadRoomReservationList(room);
+        self.loadDayReservationList(room)
         console.log(room.id)
     })
 }
 
 
 function RoomModel() {
-    var self = this;
+    var self = this
     
-    self.roomName = ko.observableArray();
-    self.roomId = ko.observableArray();
-    self.roomReservationList = ko.observableArray();
+    self.roomName = ko.observableArray()
+    self.roomId = ko.observableArray()
 }
 
 function ReservationModel() {
-    var self = this;
+    var self = this
     
-    self.reservationId = ko.observable(null);
-    self.reservationInitHour = ko.observable(null);
-    self.reservationEndHour = ko.observable(null);
-    self.reservationRoomId = ko.observable(null);
-    self.reservationRequester = ko.observableArray();
+    self.reservationId = ko.observable(null)
+    self.reservationInitHour = ko.observable(null)
+    self.reservationEndHour = ko.observable(null)
+    self.reservationRoomId = ko.observable(null)
+    self.reservationRequester = ko.observable(null)
     self.reservationTimeRange = ko.computed(function () {
-        return self.reservationEndHour() - self.reservationInitHour();
+        return self.reservationEndHour() - self.reservationInitHour()
     })
 }
 
 
-let app = new AppViewModel();
-ko.applyBindings(app);
+let app = new AppViewModel()
+ko.applyBindings(app)
