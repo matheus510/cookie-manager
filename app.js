@@ -18,8 +18,8 @@ app.get('/room', function(req, res) {
     })
 })
 
-app.get('/:day', function(req, res) {
-    reservationServices.getDayReservationList(req.params.id).then(results => {
+app.get('/:date', function(req, res) {
+    reservationServices.getDayReservationList(req.params.date).then(results => {
         console.log(results)
         res.send(results)
     }, error => {

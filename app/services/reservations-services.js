@@ -1,14 +1,18 @@
 let getConnection = require('../db-services/connection.js')
 let moment = require('moment')
 
-function getDayList(day) {
+function getDayReservationList(day) {
 
 	if (!day) {
 		let dayStart = moment()
 		let dayEnd = moment().add(1, 'd')
+			console.log(dayStart)
+	console.log(dayEnd)
 	} else {
 		let dayStart = moment(day)
 		let dayEnd = moment(day).add(1, 'd')
+			console.log(dayStart)
+	console.log(dayEnd)
 	}
 
 	return new Promise( (resolve, reject) => {
@@ -37,24 +41,6 @@ function getRoomList() {
 	    let connection = getConnection()
 
 	    connection.query('select * from room', function(err, res){
-	       	connection.end()
-
-	        if(err)
-	        	return reject(err)
-
-	        return resolve(res)
-	    })
-    })	
-}
-
-function getDayReservationList(roomId) {
-	return new Promise( (resolve, reject) => {
-
-		const {id} = roomId 
-
-	    let connection = getConnection()
-		
-	    connection.query(`select * from reservation where RoomId = ${id}`, function(err, res){
 	       	connection.end()
 
 	        if(err)
@@ -157,8 +143,8 @@ function getReservation(reservationId) {
 }
 
 module.exports = {
+	getDayReservationList,	
 	getRoomList,
-	getDayReservationList,
 	addReservation,
 	editReservation,
 	deleteReservation,

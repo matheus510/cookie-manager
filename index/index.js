@@ -6,14 +6,14 @@ function AppViewModel() {
 
     self.loadRoomList = function (day) {
         $.ajax({
-            url: '/room',
+            url: 'localhost:3000/room',
             type: 'get',
             dataType: 'json',
             success: function (data) {
                
             }
         })
-    } 
+    }
 }
 
 function agendaModel() {
@@ -74,7 +74,7 @@ function agendaModel() {
         if (!day) day = moment() 
 
         $.ajax({
-            url: '/' + day,
+            url: 'localhost:3000/' + day,
             type: 'get',
             data: data,
             dataType: 'json',
@@ -121,8 +121,3 @@ function ReservationModel() {
 
 var app = new AppViewModel();
 ko.applyBindings(app);
-
-
-
-let app = new AppViewModel()
-ko.applyBindings(app)
