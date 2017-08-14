@@ -32,11 +32,7 @@ function agendaModel() {
             type: 'get',
             dataType: 'json',
             success: function (data) {
-<<<<<<< HEAD
-                ko.mapping.fromJS(data, {}, self.reservation);
-=======
                 ko.mapping.fromJS(reservation, {}, self.reservation)
->>>>>>> 2e341489ba77687aacaa77f5bc071c4326ebc130
                 console.log(data)
             }
         })
@@ -73,32 +69,6 @@ function agendaModel() {
             }
         })
     }
-<<<<<<< HEAD
-    self.loadRoomList = function () {
-                debugger;
-        return $.ajax({
-            url: 'http://localhost:3000/room',
-            type: 'get',
-            dataType: 'json',
-            success: function (data) {
-                if (data) {
-                    ko.mapping.fromJS(data, {}, self.roomList);
-                    return self.roomList
-                }
-            }
-        });
-    } 
-    
-    self.loadRoomReservationList = function (room) {
-        return $.ajax({
-            url: 'http://localhost:3000/reservation/' + room.roomId,
-            type: 'get',
-            data: data,
-            dataType: 'json',
-            success: function (data) {;
-                ko.mapping.fromJS(reservation, {
-                    'reserva': {
-=======
     
     self.loadDayReservationList = function (day) {
         if (!day) day = moment() 
@@ -111,21 +81,14 @@ function agendaModel() {
             success: function (data) {
                 ko.mapping.fromJS(data, {
                     'reservation': {
->>>>>>> 2e341489ba77687aacaa77f5bc071c4326ebc130
                         create: function(options) {
                             return new ReservationModel(options.data);
                         }
                     }
-<<<<<<< HEAD
-                }, self.roomReservationList);
-=======
                 }, self.roomReservationList)
->>>>>>> 2e341489ba77687aacaa77f5bc071c4326ebc130
             }
         })
     }
-<<<<<<< HEAD
-=======
 
     self.loadRoomList()
 
@@ -133,7 +96,6 @@ function agendaModel() {
         self.loadDayReservationList(room)
         console.log(room.id)
     })
->>>>>>> 2e341489ba77687aacaa77f5bc071c4326ebc130
 }
 
 
@@ -162,8 +124,5 @@ ko.applyBindings(app);
 
 
 
-<<<<<<< HEAD
-=======
 let app = new AppViewModel()
 ko.applyBindings(app)
->>>>>>> 2e341489ba77687aacaa77f5bc071c4326ebc130
