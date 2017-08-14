@@ -37,12 +37,7 @@ function getRoomList() {
 	    let connection = getConnection()
 
 	    connection.query('select * from room', function(err, res){
-<<<<<<< HEAD
-			
-	       	connection.end();
-=======
 	       	connection.end()
->>>>>>> 2e341489ba77687aacaa77f5bc071c4326ebc130
 
 	        if(err)
 	        	return reject(err)
