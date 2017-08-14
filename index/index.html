@@ -93,12 +93,12 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody data-bind="foreach: ">
+                <tbody data-bind="foreach: app.reservationModule.roomList[0]().roomReservationList()">
                     <tr>
-                        <td data-bind="text: name"></td>
-                        <td data-bind="text: range"></td>
-                        <td data-bind="text: start"></td>
-                        <td data-bind="text: end"></td>
+                        <td data-bind="text: reservationRequester"></td>
+                        <td data-bind="text: reservationTimeRange"></td>
+                        <td data-bind="text: reservationInitHour"></td>
+                        <td data-bind="text: reservationEndHour"></td>
                     </tr>
                 </tbody>
             </table>

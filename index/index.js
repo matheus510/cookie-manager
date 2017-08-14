@@ -1,12 +1,12 @@
 function AppViewModel() {
     var self = this;
     
-    self.reservationModule = new ReservationModuleModel();
-    self.reservationModule.loadRoomList();
+    self.reservationModule = ko.observable(new ReservationModuleModel());
     debugger;
-    for (var i = 0, iLen = self.reservationModule.roomList.lenght; i < iLen; i++) {        
-        debugger;
-        self.reservationModule.loadRoomReservationList(self.reservationModule.roomList[i]);
+    self.reservationModule.loadRoomList;
+
+    for (var i = 0, iLen = self.reservationModule().roomList.lenght; i < iLen; i++) {        
+        self.reservationModule().loadRoomReservationList(self.reservationModule().roomList[i]);
         console.log(room.id)
     }
 
@@ -16,7 +16,7 @@ function ReservationModuleModel() {
     var self = this;
     
     self.reservation = ko.observable(new ReservationModel());
-    self.roomList = [];
+    self.roomList = ko.observableArray();
 
     self.loadReservation = function (reservationId) {
         $.ajax({
@@ -27,7 +27,7 @@ function ReservationModuleModel() {
             type: 'get',
             dataType: 'json',
             success: function (data) {
-                ko.mapping.fromJS(reservation, {}, self.reservation);
+                ko.mapping.fromJS(data, {}, self.reservation);
                 console.log(data)
             }
         })
@@ -65,29 +65,16 @@ function ReservationModuleModel() {
         });
     }
     self.loadRoomList = function () {
-        $.ajax({
+                debugger;
+        return $.ajax({
             url: 'http://localhost:3000/room',
             type: 'get',
             dataType: 'json',
             success: function (data) {
                 if (data) {
-                    debugger;
-                    for(var i = 0, iLen = data.lenght; i < iLen; i++) {
-                        debugger;
-                        if (self.roomList.indexOf(data[i].roomId) === -1) {
-                            data[i] = new RoomModel();
-                            self.roomList.push(data[i]);
-                            
-                        }
-                    }
+                    ko.mapping.fromJS(data, {}, self.roomList);
                     return self.roomList
                 }
-                    /*ko.utils.arrayForEach(data, function (room) {
-                    if (self.roomList.indexOf(room.roomId) === -1) {
-                        room = new RoomModel();
-                        self.roomList.push(room);
-                    }
-                })*/
             }
         });
     } 
@@ -98,9 +85,14 @@ function ReservationModuleModel() {
             type: 'get',
             data: data,
             dataType: 'json',
-            success: function (data) {
-                room.roomReservationList.push(data);
-                ko.mapping.fromJS(reservation, {}, self.roomReservationList);
+            success: function (data) {;
+                ko.mapping.fromJS(reservation, {
+                    'reserva': {
+                        create: function(options) {
+                            return new ReservationModel(options.data);
+                        }
+                    }
+                }, self.roomReservationList);
             }
         });
     }
@@ -128,7 +120,7 @@ function ReservationModel() {
     })
 }
 
-let app = new AppViewModel();
+var app = new AppViewModel();
 ko.applyBindings(app);
 
 
