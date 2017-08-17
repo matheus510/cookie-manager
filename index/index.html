@@ -6,7 +6,13 @@
     <title>Cookie Manager</title>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="css/jquery-ui.min.css">
-    <link href="jquery-ui.css" rel="stylesheet">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.css' />
+    <script src='js/moment.js'></script>
+    <script src='js/jquery.js'></script>
+    <script src="js/jquery-ui.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script src="//tomodo-tools.s3.amazonaws.com/tomodo.korz-0.5.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js'></script>
     <style>
         .ui-datepicker-inline {
             width: 100% !important;
@@ -62,98 +68,28 @@
 
 <body>
     <div class="row">
-        <div class="col-md-4">
-        </div>
-        
+        <div class="col-md-4">&nbsp;</div>
         <div class="col-md-4">
             <h2 class="demoHeaders">Datepicker</h2>
             <div id="datepicker"></div>
         </div>
-        
         <div class="col-md-4">
+            <div class="col-md-4 voffset7 text-center">
+                <input type="button" value="Adicionar Reserva" data-toggle="modal" href="#modal-container-844475" id="modal-844475" class="btn btn-primary" />
+            </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-5">
-            <h3>Bolacha</h3>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>
-                            Responsável
-                        </th>
-                        <th>
-                            Horário
-                        </th>
-                        <th>
-                            
-                        </th>
-                        <th>
-                            Status
-                        </th>
-                    </tr>
-                </thead>
-                <tbody data-bind="foreach: ">
-                    <tr>
-                        <td data-bind="text: name"></td>
-                        <td data-bind="text: range"></td>
-                        <td data-bind="text: start"></td>
-                        <td data-bind="text: end"></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="col-md-2 voffset7 text-center">
-            <input type="button" value="Adicionar Reserva" data-toggle="modal" href="#modal-container-844475" id="modal-844475" class="btn btn-primary" />
-        </div>
-        <h3>Biscoito</h3>
-        <div class="col-md-5">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>
-                            #
-                        </th>
-                        <th>
-                            Product
-                        </th>
-                        <th>
-                            Payment Taken
-                        </th>
-                        <th>
-                            Status
-                        </th>
-                    </tr>
-                </thead>
-                <tbody data-bind="foreach: reservations">
-                    <tr>
-                        <td data-bind="text: name"></td>
-                        <td data-bind="text: range"></td>
-                        <td data-bind="text: start"></td>
-                        <td data-bind="text: end"></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-    
-    <script src="js/jquery.js"></script>
-    <script src="js/jquery-ui.js"></script>
-    <script type="text/javascript" src="js/bootstrap.js"></script>
-    <script src="js/knockout_3.4.0/knockout-3.4.0.js"></script>
-    <script src="js/knockout_mapping/build/output/custom.knockout.mapping-latest.debug.js"></script>
-    <script src="index.js"></script>
-    
-    <script type="text/javascript">
-        $('#datepicker').datepicker();
-    </script>
-</body>
+    <div class="row" data-bind="foreach: app.roomList">
+        
+            <div class="col-md-3">
+                <div class="timeline" data-bind="attr: { 'id': $data.name }"></div>
+            </div>
 
-</html>
+    </div>
 
 <!-- modal -->
 
-<div class="row">
+ <div class="row">
     <div class="col-md-6">
         <div class="modal fade" id="modal-container-844475" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -176,18 +112,15 @@
 								</label>
                                 <input class="form-control" id="exampleInputEmail1" />
                             </div>
-                            
                             <div class="form-group">
-                                <div class="radio">
-                                    <label>
-										<input type="radio" name="radioSalas" id="idRadioBolacha" value="bolacha" aria-label="...">
-										Bolacha
-									</label>
-                                    <label>
-										<input type="radio" name="radioSalas" id="idRadioBiscoito" value="biscoito" aria-label="...">
-										Biscoito
-									</label>
-                                </div>
+                                <label class="radio-inline">
+                                    <input type="radio" name="radioSalas" id="idRadioBolacha" value="bolacha">
+                                    Bolacha
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="radioSalas" id="idRadioBiscoito" value="biscoito">
+                                    Biscoito
+                                </label>
                             </div>
                             <button type="submit" class="btn btn-primary">
 								Submit
@@ -201,4 +134,11 @@
             </div>
         </div>
     </div>
-</div>    
+</div>
+<script src="js/knockout_3.4.0/knockout-3.4.0.js"></script>
+<script src="js/knockout_mapping/build/output/custom.knockout.mapping-latest.debug.js"></script>
+<script src="index.js"></script>
+<script src="layout.js"></script>     
+</body>
+
+</html>
