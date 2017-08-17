@@ -1,13 +1,18 @@
 let app = require('./config/express.js')()
+let express = require('express')
 let reservationServices = require('./app/services/reservations-services.js')
 let bodyParser = require('body-parser')
+let cors = require('cors')
 
 function logMe(req, res, next) {
     console.log("touched")
 
     next()
 }
+app.use(cors())
 app.use(bodyParser())
+
+app.use('/', express.static('./index/'))
 
 app.get('/room', function(req, res) {
     reservationServices.getRoomList().then(results => {
@@ -18,12 +23,13 @@ app.get('/room', function(req, res) {
     })
 })
 
-app.get('/:date', function(req, res) {
+app.get('/reservation/:date', function(req, res) {
     reservationServices.getDayReservationList(req.params.date).then(results => {
         console.log(results)
         res.send(results)
     }, error => {
         res.status(400).send()
+        console.log(error)
     })
 })
 

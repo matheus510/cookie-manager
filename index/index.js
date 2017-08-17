@@ -1,31 +1,34 @@
 function AppViewModel() {
-    var self = this
+    var self = this;
     
-    self.agenda = ko.observable(new agendaModel())
-    self.roomList = ko.observableArray()
+    self.agenda = ko.observable(new AgendaModel());
+    self.roomList = ko.observableArray();
 
-    self.loadRoomList = function (day) {
+    self.loadRoomList = function () {
+        debugger;
         $.ajax({
-            url: 'localhost:3000/room',
+            url: 'http://localhost:3000/room',
             type: 'get',
             dataType: 'json',
             success: function (data) {
-               
+                debugger;
+                self.roomList(data)
             }
         })
     }
+    self.loadRoomList();
 }
 
-function agendaModel() {
-    var self = this
+function AgendaModel() {
+    var self = this;
     
-    self.reservation = ko.observable(new ReservationModel())
-    self.day = ko.observable(null)
-    self.reservationList = ko.observableArray()
+    self.reservation = ko.observable(new ReservationModel());
+    self.day = ko.observable(null);
+    self.reservationList = ko.observableArray();
 
     self.loadReservation = function (reservationId) {
         $.ajax({
-            url:'http://localhost:3000/reservation' + reservationId,
+            url:'http://localhost:3000/reservation/' + reservationId,
             headers: {
                 "Access-Control-Allow-Origin":"*"
             },
@@ -69,45 +72,46 @@ function agendaModel() {
             }
         })
     }
-    
     self.loadDayReservationList = function (day) {
-        if (!day) day = moment() 
-
         $.ajax({
-            url: 'localhost:3000/' + day,
-            type: 'get',
-            data: data,
+            url: 'http://localhost:3000/reservation/' + day,
+            type: 'GET',
             dataType: 'json',
+            headers: {
+                "Access-Control-Allow-Origin":"*"
+            },
             success: function (data) {
-                ko.mapping.fromJS(data, {
-                    'reservation': {
+                console.log(data)
+                  ko.mapping.fromJS(data, {
+                    reservation: {
                         create: function(options) {
-                            return new ReservationModel(options.data);
+                            var reservation = new ReservationModel();
+                            
+                            ko.mapping.fromJS(options.data, {}, reservation);
+                            
+                            return reservation;
                         }
-                    }
-                }, self.roomReservationList)
+                    }                    
+                }, self.reservationList)  
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                console.log(errorThrown);
             }
         })
     }
 
-    self.loadRoomList()
-
-    ko.utils.arrayForEach(self.roomList, function (room) {
-        self.loadDayReservationList(room)
-        console.log(room.id)
-    })
-}
-
+    self.loadDayReservationList('2017-02-15');
+}    
 
 function RoomModel() {
-    var self = this
+    let self = this
     
     self.roomName = ko.observableArray()
     self.roomId = ko.observableArray()
 }
 
 function ReservationModel() {
-    var self = this
+    let self = this
     
     self.reservationId = ko.observable(null)
     self.reservationInitHour = ko.observable(null)
@@ -119,5 +123,5 @@ function ReservationModel() {
     })
 }
 
-var app = new AppViewModel();
+let app = new AppViewModel();
 ko.applyBindings(app);

@@ -6,11 +6,12 @@
     <title>Cookie Manager</title>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="css/jquery-ui.min.css">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.css' />
     <script src='js/moment.js'></script>
     <script src='js/jquery.js'></script>
     <script src="js/jquery-ui.js"></script>
     <script type="text/javascript" src="js/bootstrap.js"></script>
-    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.css' />
+    <script src="//tomodo-tools.s3.amazonaws.com/tomodo.korz-0.5.js"></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js'></script>
     <style>
         .ui-datepicker-inline {
@@ -67,32 +68,28 @@
 
 <body>
     <div class="row">
-        <div class="col-md-1">&nbsp;</div>
-        <div class="col-md-3">
+        <div class="col-md-4">&nbsp;</div>
+        <div class="col-md-4">
             <h2 class="demoHeaders">Datepicker</h2>
             <div id="datepicker"></div>
         </div>
-        <div class="col-md-1">&nbsp;</div>
-        <div class="col-md-3">
-            <div id="timeline"></div>
-        </div>        
-        <div class="col-md-4 voffset7 text-center">
-            <input type="button" value="Adicionar Reserva" data-toggle="modal" href="#modal-container-844475" id="modal-844475" class="btn btn-primary" />
+        <div class="col-md-4">
+            <div class="col-md-4 voffset7 text-center">
+                <input type="button" value="Adicionar Reserva" data-toggle="modal" href="#modal-container-844475" id="modal-844475" class="btn btn-primary" />
+            </div>
         </div>
     </div>
-    
-    
-    <script src="js/knockout_3.4.0/knockout-3.4.0.js"></script>
-    <script src="js/knockout_mapping/build/output/custom.knockout.mapping-latest.debug.js"></script>
-    <script src="index.js"></script>
-    <script src="layout.js"></script>
-</body>
+    <div class="row" data-bind="foreach: app.roomList">
+        
+            <div class="col-md-3">
+                <div class="timeline" data-bind="attr: { 'id': $data.name }"></div>
+            </div>
 
-</html>
+    </div>
 
 <!-- modal -->
 
-<div class="row">
+ <div class="row">
     <div class="col-md-6">
         <div class="modal fade" id="modal-container-844475" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -137,4 +134,11 @@
             </div>
         </div>
     </div>
-</div>    
+</div>
+<script src="js/knockout_3.4.0/knockout-3.4.0.js"></script>
+<script src="js/knockout_mapping/build/output/custom.knockout.mapping-latest.debug.js"></script>
+<script src="index.js"></script>
+<script src="layout.js"></script>     
+</body>
+
+</html>
