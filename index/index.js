@@ -97,12 +97,41 @@ function ReservationModuleModel() {
 }
 
 
+<<<<<<< Updated upstream
 function RoomModel() {
     var self = this;
     
     self.roomName = ko.observableArray();
     self.roomId = ko.observableArray();
     self.roomReservationList = ko.observableArray();
+=======
+    self.reservation = ko.observable(new ReservationModel());
+    self.roomList = ko.observableArray();
+
+    self.loadRoomReservationList = function (room) {
+        $.ajax({
+            url: '/reservation/' + room.roomId,
+            type: 'get',
+            data: data,
+            dataType: 'json',
+            success: function(data) {
+                room.roomReservationList.push(data);
+                ko.mapping.fromJS(reservation, {
+                    reservationRoom: {
+                        create: function(options) {
+                            var reservationRoom = new roomModel();
+
+                            ko.mapping.fromJS(options.data, {}, reservationRoom);
+
+                            return reservationRoom;
+                        }
+                    }
+                }, self.roomReservation);
+                self.roomReservationList.push(self.roomReservation);
+            }
+        });
+    }
+>>>>>>> Stashed changes
 }
 
 function ReservationModel() {
@@ -116,8 +145,69 @@ function ReservationModel() {
     self.reservationTimeRange = ko.computed(function () {
         return self.reservationEndHour() - self.reservationInitHour();
     })
+
+    self.addReservation = function () {
+        $.ajax({
+            url: '/reservation',
+            type: 'post',
+            dataType: 'json',
+            data: ko.mapping.toJSON(self),
+            success: function(data) {
+
+            }
+        });
+    }
 }
 
+<<<<<<< Updated upstream
+=======
+function RoomModel() {
+    var self = this;
+
+    self.roomName = ko.observableArray();
+    self.roomId = ko.observableArray();
+    self.roomReservation = ko.observable(new ReservationModel());
+    self.roomReservationList = ko.observableArray();
+}
+
+function loadRoomList() {
+    $.ajax({
+        url: '/room',
+        type: 'get',
+        data: data,
+        dataType: 'json',
+        success: function(data) {
+
+            ko.utils.arrayForEach(data, function(room) {
+                if (self.roomList.indexOf(room.roomId) === -1) {
+                    room = new RoomModel();
+                    self.roomList.push(room);
+                }
+            });
+        }
+    });
+}
+
+
+
+function removeReservation(reservationId) {
+    $.ajax({
+        url: '/reservation/' + reservationId,
+        type: 'delete',
+        success: function(data) {
+
+        }
+    });
+}
+
+function editReservation() {
+    //editar a reserva
+}
+
+ko.utils.arrayForEach(self.roomList, function(room) {
+    loadRoomReservationList(room);
+})
+>>>>>>> Stashed changes
 
 let app = new AppViewModel();
 ko.applyBindings(app);
