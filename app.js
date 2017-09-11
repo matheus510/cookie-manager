@@ -12,7 +12,8 @@ function logMe(req, res, next) {
 app.use(cors())
 app.use(bodyParser())
 
-app.use('/', express.static('./index/'))
+app.use('/', express.static('/cookie-manager/dist/main.js'))
+
 
 app.get('/room', function(req, res) {
     reservationServices.getRoomList().then(results => {

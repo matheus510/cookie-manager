@@ -8,10 +8,9 @@
     <link rel="stylesheet" type="text/css" href="css/jquery-ui.min.css">
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.css' />
     <script src='js/moment.js'></script>
-    <script src='js/jquery.js'></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="js/jquery-ui.js"></script>
     <script type="text/javascript" src="js/bootstrap.js"></script>
-    <script src="//tomodo-tools.s3.amazonaws.com/tomodo.korz-0.5.js"></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js'></script>
     <style>
         .ui-datepicker-inline {
@@ -79,66 +78,66 @@
             </div>
         </div>
     </div>
-    <div class="row" data-bind="foreach: app.roomList">
-        
+    <div class="row">
+        <!-- ko foreach: app.roomList -->
             <div class="col-md-3">
-                <div class="timeline" data-bind="attr: { 'id': $data.name }"></div>
+                <div class="timeline" data-bind="attr: { 'id': name }"></div>
             </div>
-
+        <!-- /ko -->
     </div>
-
-<!-- modal -->
-
- <div class="row">
-    <div class="col-md-6">
-        <div class="modal fade" id="modal-container-844475" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-							×
-						</button>
-                        <h4 class="modal-title" id="myModalLabel">
-                            Modal title
-                        </h4>
-                    </div>
-                    <div class="modal-body">
-                        
-                        <form role="form">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">
-									Nome
-								</label>
-                                <input class="form-control" id="exampleInputEmail1" />
-                            </div>
-                            <div class="form-group">
-                                <label class="radio-inline">
-                                    <input type="radio" name="radioSalas" id="idRadioBolacha" value="bolacha">
-                                    Bolacha
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="radioSalas" id="idRadioBiscoito" value="biscoito">
-                                    Biscoito
-                                </label>
-                            </div>
-                            <button type="submit" class="btn btn-primary">
-								Submit
-							</button>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">
-								Close
-							</button>
-                        </form>
+    
+    <!-- modal -->
+    
+    <div class="row">
+        <div class="col-md-6">
+            <div class="modal fade" id="modal-container-844475" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                ×
+                            </button>
+                            <h4 class="modal-title" id="myModalLabel">
+                                Modal title
+                            </h4>
+                        </div>
+                        <div class="modal-body">
+                            
+                            <form role="form">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">
+                                        Nome
+                                    </label>
+                                    <input class="form-control" id="exampleInputEmail1" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="radio-inline">
+                                        <input type="radio" name="radioSalas" id="idRadioBolacha" value="bolacha">
+                                        Bolacha
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="radioSalas" id="idRadioBiscoito" value="biscoito">
+                                        Biscoito
+                                    </label>
+                                </div>
+                                <button type="submit" class="btn btn-primary">
+                                    Submit
+                                </button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">
+                                    Close
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<script src="js/knockout_3.4.0/knockout-3.4.0.js"></script>
-<script src="js/knockout_mapping/build/output/custom.knockout.mapping-latest.debug.js"></script>
-<script src="index.js"></script>
-<script src="layout.js"></script>     
+    <script src="js/knockout_3.4.0/knockout-3.4.0.js"></script>
+    <script src="js/knockout_mapping/build/output/custom.knockout.mapping-latest.debug.js"></script>
+    <script src="index.js"></script>
+    <script src="layout.js"></script>
 </body>
 
 </html>
